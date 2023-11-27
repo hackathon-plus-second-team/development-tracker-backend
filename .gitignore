@@ -99,3 +99,6 @@ dmypy.json
 .pytype/
 
 cython_debug/
+
+.vscode/
+.DS_Store
