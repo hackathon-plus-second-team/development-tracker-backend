@@ -17,4 +17,8 @@ class SkillAdmin(admin.ModelAdmin):
 class SkillProgressAdmin(admin.ModelAdmin):
     """Settings for presenting 'SkillProgress' model on the admin site."""
 
-    list_display = ("user", "skill", "level",)
+    list_display = (
+        "user",
+        "skill",
+        "level",
+    )

@@ -47,7 +47,7 @@ class SkillProgress(models.Model):
     )
     level = models.PositiveSmallIntegerField(
         "level",
-        help_text = "Level",
+        help_text="Level",
         default=limits["SKILL_LEVEL_MIN_VALUE"],
         validators=(
             MinValueValidator(limits["SKILL_LEVEL_MIN_VALUE"]),
@@ -60,4 +60,4 @@ class SkillProgress(models.Model):
         verbose_name_plural = "skill progresses"
 
     def __str__(self):
-        return f'{self.skill.name} - {self.level}'
+        return f"{self.skill.name} - {self.level}"
