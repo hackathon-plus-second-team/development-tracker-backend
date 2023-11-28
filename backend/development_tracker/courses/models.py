@@ -21,7 +21,7 @@ class Course(models.Model):
     description = models.CharField(
         "description",
         help_text="Course's description",
-        max_length=limits["DESCRIPTION_MAX_CHAR"],
+        max_length=limits["COURSE_DESCRIPTION_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "A course with this description already exists.",
