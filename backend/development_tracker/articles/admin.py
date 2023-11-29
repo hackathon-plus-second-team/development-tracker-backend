@@ -13,7 +13,7 @@ class SkillInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    """Settings for presenting 'Recommendation' model on the admin site."""
+    """Settings for presenting 'Article' model on the admin site."""
 
     list_display = (
         "name",

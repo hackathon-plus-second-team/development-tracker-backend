@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     "goals.apps.GoalsConfig",
     "courses.apps.CoursesConfig",
     "articles.apps.ArticlesConfig",
-    "recommendations.apps.RecommendationsConfig",
 ]
 
 MIDDLEWARE = [

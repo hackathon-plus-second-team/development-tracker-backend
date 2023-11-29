@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from core.articles.field_limits import limits
+from core.articles.field_limits import FIELD_LIMITS_ARTICLES_APP
 from skills.models import Skill
 
 
@@ -12,7 +12,7 @@ class Article(models.Model):
     name = models.CharField(
         "name",
         help_text="Article's name",
-        max_length=limits["ARTICLE_NAME_MAX_CHAR"],
+        max_length=FIELD_LIMITS_ARTICLES_APP["ARTICLE_NAME_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "An article with this name already exists.",
@@ -21,7 +21,7 @@ class Article(models.Model):
     url = models.URLField(
         "url",
         help_text="Article's url",
-        max_length=limits["ARTICLE_URL_MAX_CHAR"],
+        max_length=FIELD_LIMITS_ARTICLES_APP["ARTICLE_URL_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "An article with this url already exists.",

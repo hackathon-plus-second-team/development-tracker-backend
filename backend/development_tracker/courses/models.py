@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from core.courses.field_limits import limits
+from core.courses.field_limits import FIELD_LIMITS_COURSES_APP
 from skills.models import Skill
 
 
@@ -12,7 +12,7 @@ class Course(models.Model):
     name = models.CharField(
         "name",
         help_text="Course's name",
-        max_length=limits["COURSE_NAME_MAX_CHAR"],
+        max_length=FIELD_LIMITS_COURSES_APP["COURSE_NAME_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "A course with this name already exists.",
@@ -21,7 +21,7 @@ class Course(models.Model):
     description = models.CharField(
         "description",
         help_text="Course's description",
-        max_length=limits["COURSE_DESCRIPTION_MAX_CHAR"],
+        max_length=FIELD_LIMITS_COURSES_APP["COURSE_DESCRIPTION_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "A course with this description already exists.",

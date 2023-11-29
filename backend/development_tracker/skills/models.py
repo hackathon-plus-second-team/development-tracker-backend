@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from core.skills.field_limits import limits
+from core.skills.field_limits import FIELD_LIMITS_SKILLS_APP
 
 
 class Skill(models.Model):
@@ -13,7 +13,7 @@ class Skill(models.Model):
     name = models.CharField(
         "name",
         help_text="Skill's name",
-        max_length=limits["SKILL_NAME_MAX_CHAR"],
+        max_length=FIELD_LIMITS_SKILLS_APP["SKILL_NAME_MAX_CHAR"],
         unique=True,
         error_messages={
             "unique": "A skill with this name already exists.",
@@ -48,10 +48,10 @@ class SkillProgress(models.Model):
     level = models.PositiveSmallIntegerField(
         "level",
         help_text="Level",
-        default=limits["SKILL_LEVEL_MIN_VALUE"],
+        default=FIELD_LIMITS_SKILLS_APP["SKILL_LEVEL_MIN_VALUE"],
         validators=(
-            MinValueValidator(limits["SKILL_LEVEL_MIN_VALUE"]),
-            MaxValueValidator(limits["SKILL_LEVEL_MAX_VALUE"]),
+            MinValueValidator(FIELD_LIMITS_SKILLS_APP["SKILL_LEVEL_MIN_VALUE"]),
+            MaxValueValidator(FIELD_LIMITS_SKILLS_APP["SKILL_LEVEL_MAX_VALUE"]),
         ),
     )
 

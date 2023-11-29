@@ -17,7 +17,7 @@ class CourseInline(admin.TabularInline):
 class UserAdmin(DjangoUserAdmin):
     """Settings for presenting 'User' model on the admin site."""
 
-    inlines = [CourseInline]
+    inlines = (CourseInline,)
 
     list_display = (
         "email",
@@ -26,7 +26,6 @@ class UserAdmin(DjangoUserAdmin):
     )
     exclude = ("username",)
     search_fields = ("email",)
-    inlines = (CourseInline,)
     list_filter = ("email",)
     ordering = ("email",)
 
@@ -36,7 +35,7 @@ class UserAdmin(DjangoUserAdmin):
         "email",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "password", "paid_courses")}),
         ("Personal info", {"fields": ("first_name", "last_name")}),
         (
             "Permissions",
