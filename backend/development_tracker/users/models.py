@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from core.users.field_limits import EMAIL_MAX_CHAR
+from courses.models import Course
 from users.managers import CustomUserManager
 
 
@@ -19,6 +20,12 @@ class User(AbstractUser):
         error_messages={
             "unique": "A user with that email already exists.",
         },
+    )
+    paid_courses = models.ManyToManyField(
+        Course,
+        verbose_name="paid courses",
+        help_text="User's paid courses",
+        related_name="users",
     )
 
     objects = CustomUserManager()
