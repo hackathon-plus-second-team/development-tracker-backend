@@ -24,6 +24,22 @@ class ResponseErrorSerializer(serializers.Serializer):
 class Response400Serializer(ResponseErrorSerializer):
     """400 response: Invalid field value."""
 
+    message = serializers.CharField(
+        default="FieldValidationError",
+    )
+
+
+class Response401Serializer(ResponseErrorSerializer):
+    """400 response: Invalid field value."""
+
+    message = serializers.CharField(
+        default="AuthenticationFailed",
+    )
+
 
 class Response404Serializer(ResponseErrorSerializer):
     """404 response: Not found."""
+
+    message = serializers.CharField(
+        default="DataNotFound",
+    )
