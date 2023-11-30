@@ -47,9 +47,9 @@ class AnswerAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     """Settings for presenting 'Question' model on the admin site."""
 
-    list_display = ("test", "number", "name", "_get_count_answers")
+    list_display = ("test", "number", "name", "_get_count_answers",)
     list_select_related = True
-    fields = ("test", "number", "name", "explanation", "_get_count_answers")
+    fields = ("test", "number", "name", "explanation", "_get_count_answers",)
     readonly_fields = ("_get_count_answers",)
     inlines = (AnswerInline,)
 
@@ -64,7 +64,7 @@ class LevelTestAdmin(admin.ModelAdmin):
         "_get_count_questions",
     )
     list_select_related = True
-    fields = ("name", "skill", "_get_count_questions")
+    fields = ("name", "skill", "_get_count_questions",)
     readonly_fields = ("_get_count_questions",)
     inlines = (QuestionInline,)
 
@@ -89,13 +89,12 @@ class ChoiceAdmin(admin.ModelAdmin):
 class LevelTestProgressAdmin(admin.ModelAdmin):
     """Settings for presenting 'LevelTestProgress' model on the admin site."""
 
-    list_display = ("user", "level_test", "percentage_correct")
+    list_display = ("user", "level_test", "percentage_correct",)
     fields = (
         "user",
         "level_test",
         "choices",
         "correct_answers",
-        "wrong_answers",
         "percentage_correct",
     )
-    readonly_fields = ("correct_answers", "wrong_answers", "percentage_correct")
+    readonly_fields = ("correct_answers", "percentage_correct",)
