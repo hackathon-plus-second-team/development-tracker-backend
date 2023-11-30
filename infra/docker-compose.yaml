@@ -11,7 +11,7 @@ networks:
 services:
   db:
     container_name: postgres
-    image: postgres:15.4-alpine
+    image: postgres:16.1
     volumes:
       - pg_data:/var/lib/postgresql/data/
     ports:
@@ -57,7 +57,7 @@ services:
       - ../backend/development_tracker/.env 
 
   nginx:
-    image: nginx:1.19.3
+    image: nginx:1.25.3
     ports:
       - "80:80"
     volumes:
