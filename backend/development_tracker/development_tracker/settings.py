@@ -116,3 +116,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+if DEBUG:
+    INSTALLED_APPS.extend(("drf_spectacular",))
+
+    REST_FRAMEWORK.update(
+        {
+            "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+        }
+    )
+
+    SPECTACULAR_SETTINGS = {
+        "TITLE": "Development tracker API",
+        "DESCRIPTION": (
+            "Development tracker API. 'debug_information' in error responses "
+            "available if DEBUG=True."
+        ),
+        "VERSION": "1.0.0",
+        "SERVE_INCLUDE_SCHEMA": False,
+        "POSTPROCESSING_HOOKS": [],
+    }

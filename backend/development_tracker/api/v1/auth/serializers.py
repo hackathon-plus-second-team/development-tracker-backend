@@ -24,6 +24,8 @@ class AuthUserSignInSerilizer(serializers.Serializer):
         user = get_object_or_404(User, email=email)
 
         if not check_password(password, user.password):
-            raise serializers.ValidationError({"detail": self.error_messages["invalid_password"]})
+            raise serializers.ValidationError(
+                {"detail": self.error_messages["invalid_password"]}
+            )
 
         return data
