@@ -40,8 +40,8 @@ class SkillProgress(models.Model):
     )
     skill = models.ForeignKey(
         Skill,
-        verbose_name="Skill",
-        help_text="User",
+        verbose_name="skill",
+        help_text="Skill",
         on_delete=models.PROTECT,
         related_name="skill_progresses",
     )

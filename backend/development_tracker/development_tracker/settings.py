@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "goals.apps.GoalsConfig",
     "courses.apps.CoursesConfig",
     "articles.apps.ArticlesConfig",
+    "level_tests.apps.LevelTestsConfig",
 ]
 
 MIDDLEWARE = [
