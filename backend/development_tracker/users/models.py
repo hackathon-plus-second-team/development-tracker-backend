@@ -18,7 +18,7 @@ class User(AbstractUser):
         max_length=EMAIL_MAX_CHAR,
         unique=True,
         error_messages={
-            "unique": "A user with that email already exists.",
+            "unique": "A user with this email already exists.",
         },
     )
     paid_courses = models.ManyToManyField(
