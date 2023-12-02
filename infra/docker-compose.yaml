@@ -10,22 +10,22 @@ networks:
 
 services:
   db:
-    container_name: postgres
-    image: postgres:16.1
+    container_name: postgres-dt
+    image: postgres:16.1-alpine
     volumes:
       - pg_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
     env_file:
-      - ../backend/development_tracker/.env
+      - ../backend/development_tracker/.env 
     networks:
       - development_tracker
     restart: on-failure
 
   pgadmin:
-    container_name: pgadmin
+    container_name: pgadmin-dt
     image: dpage/pgadmin4
-    env_file: ../backend/development_tracker/.env
+    env_file: ../backend/development_tracker/.env 
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
