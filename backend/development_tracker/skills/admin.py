@@ -9,7 +9,10 @@ from skills.models import Skill, SkillProgress
 class SkillAdmin(admin.ModelAdmin):
     """Settings for presenting 'Skill' model on the admin site."""
 
-    list_display = ("name",)
+    list_display = (
+        "id",
+        "name",
+    )
     search_fields = ("name",)
 
 

@@ -22,7 +22,7 @@ DB_ENGINE=django.db.backends.postgresql
 POSTGRES_DB=development_tracker
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
-DB_HOST=db
+DB_HOST=postgres
 DB_PORT=5432
 
 DEBUG=True
@@ -44,4 +44,18 @@ docker-compose up -d
 
 ```
 http://localhost/
+```
+- документация доступна по адресу:
+
+```
+http://localhost/api/dynamic_doc/swagger/v1/
+```
+
+- после запуска проекта в базе данных уже есть пользователь с оплаченными курсами:
+
+```
+{
+    "email": "TestUser@yandex.ru",
+    "password": "ZQj-hBQ-c83-fmu"
+}
 ```
