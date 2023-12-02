@@ -5,5 +5,5 @@ from django.urls import path
 from api.v1.courses.views import my_courses
 
 urlpatterns = [
-    path("my_courses/", my_courses, name="my_courses"),
+    path("my/", my_courses, name="my_courses"),
 ]
