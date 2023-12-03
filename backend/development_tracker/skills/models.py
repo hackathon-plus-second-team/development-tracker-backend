@@ -19,6 +19,11 @@ class Skill(models.Model):
             "unique": "A skill with this name already exists.",
         },
     )
+    description = models.CharField(
+        "description",
+        help_text="Skill's description",
+        max_length=FIELD_LIMITS_SKILLS_APP["SKILL_DESCRIPTION_MAX_CHAR"],
+    )
 
     class Meta:
         verbose_name = "skill"

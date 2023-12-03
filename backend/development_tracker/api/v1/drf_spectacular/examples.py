@@ -16,3 +16,18 @@ MyCoursesList200ResponseExample = OpenApiExample(
         "skills": [{"id": 0, "name": "string", "level": 0}],
     },
 )
+
+SkillUserDetail200ResponseExample = OpenApiExample(
+    name="SkillUserDetail",
+    description="Example to response 200 for skill user detail.",
+    response_only=True,
+    status_codes=[str(status.HTTP_200_OK)],
+    value={
+        "id": 0,
+        "name": "string",
+        "description": "string",
+        "level": 3,
+        "level_test": 6,
+        "user_cources": [{"id": 0, "name": "string"}],
+    },
+)

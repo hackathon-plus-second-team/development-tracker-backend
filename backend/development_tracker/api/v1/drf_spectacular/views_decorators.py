@@ -10,8 +10,12 @@ from api.v1.drf_spectacular.serializers import (
     Response401Serializer,
     Response404Serializer,
 )
-from api.v1.drf_spectacular.examples import MyCoursesList200ResponseExample
+from api.v1.drf_spectacular.examples import (
+    MyCoursesList200ResponseExample,
+    SkillUserDetail200ResponseExample,
+)
 from api.v1.courses.serializers import CourseSerializer
+from api.v1.skills.serializers import SkillForUserFullSerializer
 
 
 VIEWS_DECORATORS = {
@@ -26,13 +30,23 @@ VIEWS_DECORATORS = {
     ),
     "my_courses": extend_schema(
         tags=("courses",),
-        request=AuthUserSignInSerilizer,
         responses={
             status.HTTP_200_OK: CourseSerializer,
             status.HTTP_401_UNAUTHORIZED: Response401Serializer,
         },
         examples=[
-                MyCoursesList200ResponseExample,
-            ],
+            MyCoursesList200ResponseExample,
+        ],
+    ),
+    "skill_user_detail": extend_schema(
+        tags=("skills",),
+        responses={
+            status.HTTP_200_OK: SkillForUserFullSerializer,
+            status.HTTP_401_UNAUTHORIZED: Response401Serializer,
+            status.HTTP_404_NOT_FOUND: Response404Serializer,
+        },
+        examples=[
+            SkillUserDetail200ResponseExample,
+        ],
     ),
 }

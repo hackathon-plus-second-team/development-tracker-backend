@@ -20,7 +20,7 @@ class LevelTest(models.Model):
             "unique": "A level test with this name already exists.",
         },
     )
-    skill = models.ForeignKey(
+    skill = models.OneToOneField(
         Skill,
         on_delete=models.SET_NULL,
         verbose_name="skill",

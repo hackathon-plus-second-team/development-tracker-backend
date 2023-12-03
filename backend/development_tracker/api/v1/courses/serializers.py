@@ -1,26 +1,10 @@
-"""Serializers for the endpoints 'auth' of 'Api' application v1."""
+"""Serializers for the endpoints 'cources' of 'Api' application v1."""
 
 from rest_framework import serializers
 
+from api.v1.core.serializers import SkillProgressSerializer
 from courses.models import Course
 from skills.models import Skill, SkillProgress
-
-
-class SkillProgressSerializer(serializers.ModelSerializer):
-    """Serializer for viewing skill progresses."""
-
-    id = serializers.PrimaryKeyRelatedField(
-        queryset=Skill.objects.all(), source="skill.id"
-    )
-    name = serializers.CharField(source="skill.name")
-
-    class Meta:
-        model = SkillProgress
-        fields = (
-            "id",
-            "name",
-            "level",
-        )
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -37,7 +21,8 @@ class CourseSerializer(serializers.ModelSerializer):
             "skills",
         )
 
-    def get_skills(self, obj):
+    def get_skills(self, obj: SkillProgress) -> list[Skill]:
+        """Get list of skills for current course."""
         request_user = self.context["request"].user
         skills = obj.skills.all()
         skill_progresses = []
@@ -52,3 +37,14 @@ class CourseSerializer(serializers.ModelSerializer):
 
             skill_progresses.append(skill_progress)
         return SkillProgressSerializer(skill_progresses, many=True).data
+
+
+class CourseShortSerializer(CourseSerializer):
+    """Serializer for short representation of course."""
+
+    class Meta:
+        model = Course
+        fields = (
+            "id",
+            "name",
+        )
