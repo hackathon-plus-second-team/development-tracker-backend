@@ -58,11 +58,8 @@ class CreateUpdateGoalSerializer(serializers.ModelSerializer):
         return goal
 
     def update(self, instance, validated_data):
-        instance.name = validated_data.get("name", instance.name)
-        instance.deadline = validated_data.get("deadline", instance.deadline)
-
         skills = validated_data.get("skills")
-        if skills:
+        if skills is not None:
             for skill in skills:
                 instance.skills.add(skill)
 
@@ -70,8 +67,10 @@ class CreateUpdateGoalSerializer(serializers.ModelSerializer):
             for skill in existing_skills:
                 if skill not in skills:
                     instance.skills.remove(skill)
-        instance.save()
 
+        super().update(instance, validated_data)
+        instance.save()
+        
         update_goal_level(instance)
         return instance
 
