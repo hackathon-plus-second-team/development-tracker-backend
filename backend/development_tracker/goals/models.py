@@ -15,10 +15,6 @@ class Goal(models.Model):
         "name",
         help_text="Skill's name",
         max_length=FIELD_LIMITS_GOALS_APP["GOAL_NAME_MAX_CHAR"],
-        unique=True,
-        error_messages={
-            "unique": "A goal with this name already exists.",
-        },
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -52,6 +48,12 @@ class Goal(models.Model):
     class Meta:
         verbose_name = "goal"
         verbose_name_plural = "goals"
+        constraints = (
+            models.UniqueConstraint(
+                fields=("name", "user"),
+                name="unique_name_user_goal",
+            ),
+        )
 
     def __str__(self):
         return self.name
