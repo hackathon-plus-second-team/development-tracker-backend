@@ -48,14 +48,14 @@ class QuestionAdmin(admin.ModelAdmin):
     """Settings for presenting 'Question' model on the admin site."""
 
     list_display = (
-        "test",
+        "level_test",
         "number",
         "name",
         "_get_count_answers",
     )
     list_select_related = True
     fields = (
-        "test",
+        "level_test",
         "number",
         "name",
         "explanation",
@@ -90,11 +90,13 @@ class ChoiceAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
+        "level_test",
         "question",
         "answer",
     )
     fields = (
         "user",
+        "level_test",
         "question",
         "answer",
     )

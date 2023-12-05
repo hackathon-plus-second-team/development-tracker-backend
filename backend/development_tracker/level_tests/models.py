@@ -70,7 +70,7 @@ class Question(models.Model):
             ),
         ),
     )
-    test = models.ForeignKey(
+    level_test = models.ForeignKey(
         LevelTest,
         on_delete=models.CASCADE,
         verbose_name="test",
@@ -84,7 +84,7 @@ class Question(models.Model):
         verbose_name_plural = "questions"
 
     def __str__(self):
-        return f"question {self.number} to level test {self.test}"
+        return f"question {self.number} to level test {self.level_test}"
 
     def _get_count_answers(self):
         """Get count of questions in level test."""
@@ -141,6 +141,13 @@ class Choice(models.Model):
         help_text="User",
         related_name="choices",
     )
+    level_test = models.ForeignKey(
+        LevelTest,
+        on_delete=models.CASCADE,
+        verbose_name="level_test",
+        help_text="Level test for this choice",
+        related_name="choices",
+    )
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
@@ -160,6 +167,12 @@ class Choice(models.Model):
         ordering = ("user",)
         verbose_name = "choice"
         verbose_name_plural = "choices"
+        constraints = (
+            models.UniqueConstraint(
+                fields=["user", "level_test", "question"],
+                name="unique_choice_test_user_question",
+            ),
+        )
 
     def __str__(self):
         return f"{self.question} - {self.answer} by {self.user}"
