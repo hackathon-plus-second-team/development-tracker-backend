@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "corsheaders",
     "rest_framework_simplejwt",
     "users.apps.UsersConfig",
     "skills.apps.SkillsConfig",
@@ -44,6 +45,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "development_tracker.urls"
@@ -125,6 +128,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+CORS_URLS_REGEX = r"^/api/.*$"
+
+CORS_ALLOWED_ORIGINS = ("http://localhost:3000",)
 
 if DEBUG:
     INSTALLED_APPS.extend(("drf_spectacular",))
