@@ -2,8 +2,8 @@
 
 import datetime
 import json
-import pytz
 
+import pytz
 from django.contrib.auth import get_user_model
 from django.test import RequestFactory
 from rest_framework import status
