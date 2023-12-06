@@ -70,7 +70,6 @@ class CreateUpdateGoalSerializer(serializers.ModelSerializer):
 
         super().update(instance, validated_data)
         instance.save()
-
         update_goal_level(instance)
         return instance
 
