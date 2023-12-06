@@ -1,4 +1,4 @@
-"""Tests for URLs configuration of the endpoints 'goals' of 'Api' application v1."""
+"""Tests for the endpoints 'goals' of 'Api' application v1."""
 
 import datetime
 import json
