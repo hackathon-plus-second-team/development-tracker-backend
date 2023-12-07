@@ -70,7 +70,7 @@ class Question(models.Model):
             ),
         ),
     )
-    test = models.ForeignKey(
+    level_test = models.ForeignKey(
         LevelTest,
         on_delete=models.CASCADE,
         verbose_name="test",
@@ -84,7 +84,11 @@ class Question(models.Model):
         verbose_name_plural = "questions"
 
     def __str__(self):
-        return f"question {self.number} to level test {self.test}"
+        return f"question {self.number} to level test {self.level_test}"
+
+    def _get_correct_answer(self):
+        """Get correct answer."""
+        return self.answers.get(is_correct=True)
 
     def _get_count_answers(self):
         """Get count of questions in level test."""
@@ -128,41 +132,7 @@ class Answer(models.Model):
         verbose_name_plural = "answers"
 
     def __str__(self):
-        return f"answer {self.id} to question {self.question}"
-
-
-class Choice(models.Model):
-    """Model Choice. Represent users choice."""
-
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        verbose_name="user",
-        help_text="User",
-        related_name="choices",
-    )
-    question = models.ForeignKey(
-        Question,
-        on_delete=models.CASCADE,
-        verbose_name="question",
-        help_text="Question",
-        related_name="choices",
-    )
-    answer = models.ForeignKey(
-        Answer,
-        on_delete=models.CASCADE,
-        verbose_name="answer",
-        help_text="Answer",
-        related_name="choices",
-    )
-
-    class Meta:
-        ordering = ("user",)
-        verbose_name = "choice"
-        verbose_name_plural = "choices"
-
-    def __str__(self):
-        return f"{self.question} - {self.answer} by {self.user}"
+        return f"answer {self.number} to question {self.question}"
 
 
 class LevelTestProgress(models.Model):
@@ -182,12 +152,6 @@ class LevelTestProgress(models.Model):
         help_text="User",
         related_name="level_test_progress",
     )
-    choices = models.ManyToManyField(
-        Choice,
-        verbose_name="choices",
-        help_text="Choices",
-        related_name="level_test_progress",
-    )
     correct_answers = models.PositiveSmallIntegerField(
         "count of correct answers in level test",
         help_text="Count of correct answers in level test",
@@ -201,19 +165,32 @@ class LevelTestProgress(models.Model):
             ),
         ),
     )
-    percentage_correct = models.DecimalField(
+    percentage_correct = models.PositiveSmallIntegerField(
         "percentage of correct answers",
         help_text="percentage of correct answers",
-        max_digits=4,
-        decimal_places=2,
-        default=0,
+        default=FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MIN_PERCENTAGE"],
+        validators=(
+            MinValueValidator(
+                FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MIN_PERCENTAGE"]
+            ),
+            MaxValueValidator(
+                FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MAX_PERCENTAGE"]
+            ),
+        ),
     )
 
     class Meta:
         ordering = ("user",)
         verbose_name = "level test progress"
         verbose_name_plural = "level test progresses"
+        constraints = (
+            models.UniqueConstraint(
+                fields=["user", "level_test"],
+                name="unique_progress_level_test_user",
+            ),
+        )
 
     def __str__(self) -> str:
-        return f"""{self.level_test} for {self.user} result is
-            {self.percentage_correct} %."""
+        return (
+            f"{self.level_test} for {self.user} result is {self.percentage_correct}%."
+        )
