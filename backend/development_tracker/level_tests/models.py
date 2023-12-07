@@ -165,12 +165,18 @@ class LevelTestProgress(models.Model):
             ),
         ),
     )
-    percentage_correct = models.DecimalField(
+    percentage_correct = models.PositiveSmallIntegerField(
         "percentage of correct answers",
         help_text="percentage of correct answers",
-        max_digits=5,
-        decimal_places=2,
-        default=0,
+        default=FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MIN_PERCENTAGE"],
+        validators=(
+            MinValueValidator(
+                FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MIN_PERCENTAGE"]
+            ),
+            MaxValueValidator(
+                FIELD_LIMITS_LEVEL_TESTS_APP["LEVEL_TEST_PROGRESS_MAX_PERCENTAGE"]
+            ),
+        ),
     )
 
     class Meta:

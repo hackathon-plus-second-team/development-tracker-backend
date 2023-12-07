@@ -58,12 +58,11 @@ LevelTestUserAnswer201ResponseExample = OpenApiExample(
     response_only=True,
     status_codes=[str(status.HTTP_201_CREATED)],
     value={
-        "user": "admin@email.ru",
         "skill": "SQL",
         "level_test": 1,
         "correct_answers": 2,
         "count_questions": 3,
-        "percentage_correct": "66.67",
+        "percentage_correct": "66",
     },
 )
 
@@ -74,12 +73,11 @@ LevelTestResult200ResponseExample = OpenApiExample(
     status_codes=[str(status.HTTP_200_OK)],
     value={
         "current_skill_test": {
-            "user": "admin@email.ru",
             "skill": "string",
             "level_test": 1,
             "correct_answers": 2,
             "count_questions": 3,
-            "percentage_correct": "66.67",
+            "percentage_correct": "66",
         },
         "best_skill_result": {"id": 1, "name": "string", "level": 100},
         "recommendations": {

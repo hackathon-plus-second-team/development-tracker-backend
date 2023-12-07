@@ -54,6 +54,24 @@ class LevelTestSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
+class LevelTestProgressReadSerializer(serializers.ModelSerializer):
+    """Seriaizer to work with requests about level test results."""
+
+    count_questions = serializers.IntegerField(source="level_test._get_count_questions")
+    skill = serializers.CharField(source="level_test.skill")
+
+    class Meta:
+        model = LevelTestProgress
+        fields = (
+            "skill",
+            "level_test",
+            "correct_answers",
+            "count_questions",
+            "percentage_correct",
+        )
+        read_only_fields = fields
+
+
 class QuestionAnswerSerializer(serializers.Serializer):
     """Serializer to represent question and user's answer to the level test."""
 
@@ -74,29 +92,6 @@ class QuestionAnswerSerializer(serializers.Serializer):
                 self.error_messages["uncorrect_answer"].format(question=question.number)
             )
         return data
-
-    def to_representation(self, instance):
-        return super().to_representation(instance)
-
-
-class LevelTestProgressReadSerializer(serializers.ModelSerializer):
-    """Seriaizer to work with requests about level test results."""
-
-    count_questions = serializers.IntegerField(source="level_test._get_count_questions")
-    skill = serializers.CharField(source="level_test.skill")
-    user = serializers.CharField(source="user.email")
-
-    class Meta:
-        model = LevelTestProgress
-        fields = (
-            "user",
-            "skill",
-            "level_test",
-            "correct_answers",
-            "count_questions",
-            "percentage_correct",
-        )
-        read_only_fields = fields
 
 
 class LevelTestUserAnswersSerializer(serializers.Serializer):
@@ -138,7 +133,7 @@ class LevelTestUserAnswersSerializer(serializers.Serializer):
                 correct_answers += 1
 
         percentage_correct = (
-            correct_answers / self.level_test._get_count_questions() * 100
+            correct_answers * 100 // self.level_test._get_count_questions()
         )
 
         request_user = self.context.get("request").user
