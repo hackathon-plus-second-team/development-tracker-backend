@@ -31,6 +31,20 @@ SkillUserDetail200ResponseExample = OpenApiExample(
     },
 )
 
+GoalUserDetail200ResponseExample = OpenApiExample(
+    name="GoalUserDetail",
+    description="Example to response 200 for goal user detail.",
+    response_only=True,
+    status_codes=[str(status.HTTP_200_OK)],
+    value={
+        "id": 0,
+        "name": "string",
+        "deadline": "2023-03-01T12:00:00Z",
+        "skills": [{"id": 0, "name": "string", "level": 0}],
+        "level": 23,
+    },
+)
+
 LevelTestDetail200ResponseExample = OpenApiExample(
     name="LevelTestDetail",
     description="Example to response 200 for level test detail.",

@@ -2,9 +2,8 @@
 
 from rest_framework import serializers
 
-from api.v1.core.serializers import SkillProgressSerializer
+from api.v1.core.utilities import get_skills
 from courses.models import Course
-from skills.models import Skill, SkillProgress
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -21,22 +20,9 @@ class CourseSerializer(serializers.ModelSerializer):
             "skills",
         )
 
-    def get_skills(self, obj: SkillProgress) -> list[Skill]:
-        """Get list of skills for current course."""
-        request_user = self.context["request"].user
-        skills = obj.skills.all()
-        skill_progresses = []
-
-        for skill in skills:
-            try:
-                skill_progress = SkillProgress.objects.get(
-                    skill=skill, user=request_user
-                )
-            except SkillProgress.DoesNotExist:
-                skill_progress = SkillProgress(skill=skill, user=request_user)
-
-            skill_progresses.append(skill_progress)
-        return SkillProgressSerializer(skill_progresses, many=True).data
+    def get_skills(self, obj):
+        """Get a list of the course's skills."""
+        return get_skills(self.context["request"].user, obj)
 
 
 class CourseShortSerializer(CourseSerializer):
