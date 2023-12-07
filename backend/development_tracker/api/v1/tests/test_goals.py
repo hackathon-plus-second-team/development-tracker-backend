@@ -96,16 +96,16 @@ class GoalViewSetTestCase(APITestCase):
         force_authenticate(self.request, user=self.user)
         view = GoalViewSet.as_view({"patch": "partial_update"})
         response = view(self.request, pk=goal_id)
-        # data = response.data
+        data = response.data
 
         goal = Goal.objects.get(id=goal_id)
         serializer = ReadGoalSerializer(
             instance=goal, context={"request": self.request}
         )
-        # expected_data = serializer.data
+        expected_data = serializer.data
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(data, expected_data)
 
     def test_delete_goal(self):
         goal_id = self.goal.id
