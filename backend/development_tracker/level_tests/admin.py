@@ -4,7 +4,6 @@ from django.contrib import admin
 
 from level_tests.models import (
     Answer,
-    Choice,
     LevelTest,
     LevelTestProgress,
     Question,
@@ -84,24 +83,6 @@ class LevelTestAdmin(admin.ModelAdmin):
     inlines = (QuestionInline,)
 
 
-@admin.register(Choice)
-class ChoiceAdmin(admin.ModelAdmin):
-    """Settings for presenting 'Choice' model on the admin site."""
-
-    list_display = (
-        "user",
-        "level_test",
-        "question",
-        "answer",
-    )
-    fields = (
-        "user",
-        "level_test",
-        "question",
-        "answer",
-    )
-
-
 @admin.register(LevelTestProgress)
 class LevelTestProgressAdmin(admin.ModelAdmin):
     """Settings for presenting 'LevelTestProgress' model on the admin site."""
@@ -114,11 +95,6 @@ class LevelTestProgressAdmin(admin.ModelAdmin):
     fields = (
         "user",
         "level_test",
-        "choices",
-        "correct_answers",
-        "percentage_correct",
-    )
-    readonly_fields = (
         "correct_answers",
         "percentage_correct",
     )
