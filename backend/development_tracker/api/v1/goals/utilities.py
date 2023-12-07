@@ -19,8 +19,8 @@ def get_goal_level(user: User, obj: Goal) -> int:
         level_sum += skill_progress["level"]
         count += 1
 
-    avg_level = level_sum / count if count > 0 else 0
-    return int(avg_level)
+    avg_level = level_sum // count if count > 0 else 0
+    return avg_level
 
 
 def update_goal_level(obj: Goal) -> None:

@@ -5,9 +5,8 @@ import json
 
 import pytz
 from django.contrib.auth import get_user_model
-from django.test import RequestFactory
 from rest_framework import status
-from rest_framework.test import APITestCase, force_authenticate
+from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate
 
 from api.v1.goals.serializers import ReadGoalSerializer
 from api.v1.goals.views import GoalViewSet
@@ -21,7 +20,7 @@ class GoalViewSetTestCase(APITestCase):
     """Tests for GoalViewSet."""
 
     def setUp(self):
-        self.factory = RequestFactory()
+        self.factory = APIRequestFactory()
         self.user = User.objects.create(
             email="test@example.com", password="testpassword"
         )
@@ -31,9 +30,8 @@ class GoalViewSetTestCase(APITestCase):
             user=self.user,
         )
         self.skill_first = Skill.objects.create(name="Python")
-        self.goal.skills.add(self.skill_first)
         self.skill_second = Skill.objects.create(name="Django")
-        self.goal.skills.add(self.skill_second)
+        self.goal.skills.add(self.skill_first, self.skill_second)
         self.skill_third = Skill.objects.create(name="SQL")
 
     def test_get_goals_list(self):
@@ -53,7 +51,9 @@ class GoalViewSetTestCase(APITestCase):
         response = view(request, pk=self.goal.id)
         data = response.data
 
-        serializer = ReadGoalSerializer(instance=self.goal, context={"request": request})
+        serializer = ReadGoalSerializer(
+            instance=self.goal, context={"request": request}
+        )
         expected_data = serializer.data
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -63,7 +63,7 @@ class GoalViewSetTestCase(APITestCase):
         request_data = {
             "name": "My_goal",
             "deadline": "2023-03-01T13:00:00",
-            "skills": [1, 2],
+            "skills": [self.skill_first.id, self.skill_second.id],
         }
         self.request = self.factory.post("/api/v1/goals/", data=request_data)
         force_authenticate(self.request, user=self.user)
@@ -81,19 +81,17 @@ class GoalViewSetTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(data, expected_data)
- 
+
     def test_update_goal(self):
         request_data = {
             "name": "Updated Goal",
             "deadline": "2023-03-15T18:00:00",
-            "skills": [self.skill_third.id]
+            "skills": [self.skill_third.id],
         }
         goal_id = self.goal.id
         url = f"/api/v1/goals/{goal_id}/"
         self.request = self.factory.patch(
-            url, 
-            data=json.dumps(request_data), 
-            content_type='application/json'
+            url, data=json.dumps(request_data), content_type="application/json"
         )
         force_authenticate(self.request, user=self.user)
         view = GoalViewSet.as_view({"patch": "partial_update"})
