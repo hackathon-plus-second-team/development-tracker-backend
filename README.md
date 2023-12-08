@@ -1,5 +1,16 @@
 # development-tracker-backend
 
+### Технологии:
+- Python 3.11
+- Django 4.2.7
+- Django REST Framework 3.14.0
+- djangorestframework-simplejwt 5.3.0
+- drf_spectacular 0.26.5
+- PostgreSQL 16.1
+- gunicorn 21.2.0
+- nginx 1.25.3
+- Docker 
+
 ### Как запустить проект(development version)
 
 - клонировать репозиторий
