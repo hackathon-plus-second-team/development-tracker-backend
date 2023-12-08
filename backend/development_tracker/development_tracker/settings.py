@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_spectacular",
     "corsheaders",
     "rest_framework_simplejwt",
     "users.apps.UsersConfig",
@@ -72,7 +73,7 @@ WSGI_APPLICATION = "development_tracker.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.getenv("POSTGRES_DB", "postgres"),
+        "NAME": os.getenv("POSTGRES_DB", "development_tracker"),
         "USER": os.getenv("POSTGRES_USER", "postgres"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD", "postgres"),
         "HOST": os.getenv("DB_HOST", "db"),
@@ -103,6 +104,18 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "EXCEPTION_HANDLER": "api.v1.core.exception_handler.api_exception_handler",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Development tracker API",
+    "DESCRIPTION": (
+        "Development tracker API. 'debug_information' in error responses "
+        "available if DEBUG=True."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "POSTPROCESSING_HOOKS": [],
 }
 
 SIMPLE_JWT = {
@@ -132,23 +145,3 @@ AUTH_USER_MODEL = "users.User"
 CORS_URLS_REGEX = r"^/api/.*$"
 
 CORS_ALLOWED_ORIGINS = ("http://localhost:5173",)
-
-if DEBUG:
-    INSTALLED_APPS.extend(("drf_spectacular",))
-
-    REST_FRAMEWORK.update(
-        {
-            "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-        }
-    )
-
-    SPECTACULAR_SETTINGS = {
-        "TITLE": "Development tracker API",
-        "DESCRIPTION": (
-            "Development tracker API. 'debug_information' in error responses "
-            "available if DEBUG=True."
-        ),
-        "VERSION": "1.0.0",
-        "SERVE_INCLUDE_SCHEMA": False,
-        "POSTPROCESSING_HOOKS": [],
-    }

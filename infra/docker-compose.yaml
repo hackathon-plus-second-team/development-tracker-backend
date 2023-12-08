@@ -54,7 +54,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ../backend/development_tracker/.env 
+      - ../backend/development_tracker/.env
 
   nginx:
     image: nginx:1.25.3
