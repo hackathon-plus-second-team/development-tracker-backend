@@ -11,19 +11,12 @@
 - nginx 1.25.3
 - Docker 
 
-### Как запустить проект(development version)
+### Как запустить проект
 
 - клонировать репозиторий
 
 ```
 git@github.com:hackathon-plus-second-team/development-tracker-backend.git
-```
-
-- перейти в ветку develop и загрузить актуальные изменения
-
-```
-git checkout develop origin/develop
-git pull
 ```
 
 - в домашней директории проекта создать файл .env и наполнить его по примеру .env_sample
@@ -51,6 +44,12 @@ cd infra
 docker-compose up -d
 ```
 
+### Предупреждение:
+
+```
+Если вы используете Windows, убедитесь, что файл run_app.sh имеет формат конца строки LF
+```
+
 - проект доступен по адресу:
 
 ```
@@ -62,7 +61,7 @@ http://localhost/
 http://localhost/api/dynamic_doc/swagger/v1/
 ```
 
-- после запуска проекта в базе данных уже есть пользователь с оплаченными курсами:
+- после запуска проекта в базе данных уже есть пользователь:
 
 ```
 {
@@ -70,3 +69,36 @@ http://localhost/api/dynamic_doc/swagger/v1/
     "password": "ZQj-hBQ-c83-fmu"
 }
 ```
+- также есть superuser:
+
+```
+{
+    "email": "admin@yandex.ru",
+    "password": "admin"
+}
+```
+
+### Запустить [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend):
+
+- клонировать репозиторий
+
+```
+git@github.com:hackathon-plus-second-team/development-tracker-backend.git
+```
+
+- запустить сборку контейнеров:
+
+```
+docker-compose up -d
+```
+- проект доступен по адресу:
+
+```
+http://localhost:5173/
+```
+
+## Авторы
+
+[SunnyInHouse](https://github.com/SunnyInHouse)
+
+[ApriCotBrain](https://github.com/ApriCotBrain)
