@@ -25,7 +25,6 @@ def get_skills(user: User, obj: SkillProgress) -> list[Skill]:
 
 def get_average_level(user: User, obj: object) -> int:
     """Calculate the average level."""
-
     skill_progresses = get_skills(user, obj)
     level_sum = 0
     count = 0
