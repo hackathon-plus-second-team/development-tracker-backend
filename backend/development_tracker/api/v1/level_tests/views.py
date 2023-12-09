@@ -34,7 +34,7 @@ def level_test_answer(request, test_id):
     )
     serializer.is_valid(raise_exception=True)
     serializer.save()
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @activate_drf_spectacular_view_decorator

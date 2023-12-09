@@ -1,6 +1,5 @@
 """URLs configuration of the 'api' application."""
 
-from django.conf import settings
 from django.urls import include, path
 from drf_spectacular.views import (
     SpectacularAPIView,

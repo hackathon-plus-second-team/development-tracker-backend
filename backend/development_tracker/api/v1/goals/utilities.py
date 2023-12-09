@@ -10,7 +10,6 @@ User = get_user_model()
 
 def get_goal_level(user: User, obj: Goal) -> int:
     """Calculate the goal level."""
-
     skill_progresses = get_skills(user, obj)
     level_sum = 0
     count = 0
