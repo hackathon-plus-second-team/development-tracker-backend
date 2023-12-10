@@ -77,7 +77,7 @@ LevelTestUserAnswer201ResponseExample = OpenApiExample(
         "level_test": 1,
         "correct_answers": 2,
         "count_questions": 3,
-        "percentage_correct": "66",
+        "percentage_correct": 66,
     },
 )
 
@@ -92,7 +92,7 @@ LevelTestResult200ResponseExample = OpenApiExample(
             "level_test": 1,
             "correct_answers": 2,
             "count_questions": 3,
-            "percentage_correct": "66",
+            "percentage_correct": 66,
         },
         "best_skill_result": {"id": 1, "name": "string", "level": 100},
         "recommendations": {
