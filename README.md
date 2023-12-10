@@ -1,6 +1,6 @@
-# development-tracker-backend
+# Серверная часть для [трекера развития](https://github.com/hackathon-plus-second-team)
 
-### Технологии:
+### Технологии
 - Python 3.11
 - Django 4.2.7
 - Django REST Framework 3.14.0
@@ -19,7 +19,7 @@
 git@github.com:hackathon-plus-second-team/development-tracker-backend.git
 ```
 
-- в домашней директории проекта создать файл .env и наполнить его по примеру .env_sample
+- в директории backend/development_tracker создать файл .env и наполнить его по примеру .env_sample
 
 ```
 DB_ENGINE=django.db.backends.postgresql
@@ -30,6 +30,11 @@ DB_HOST=postgres
 DB_PORT=5432
 
 DEBUG=True
+```
+### Предупреждение
+
+```
+Если вы используете Windows, убедитесь, что файл run_app.sh имеет формат конца строки LF
 ```
 
 - перейти в директорию infra
@@ -42,12 +47,6 @@ cd infra
 
 ```
 docker-compose up -d
-```
-
-### Предупреждение:
-
-```
-Если вы используете Windows, убедитесь, что файл run_app.sh имеет формат конца строки LF
 ```
 
 - проект доступен по адресу:
@@ -78,7 +77,7 @@ http://localhost/api/dynamic_doc/swagger/v1/
 }
 ```
 
-### Запустить [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend):
+### Запустить [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend)
 
 - клонировать репозиторий
 
