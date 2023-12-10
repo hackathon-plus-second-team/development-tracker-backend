@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     "skills.apps.SkillsConfig",
     "goals.apps.GoalsConfig",
     "courses.apps.CoursesConfig",
-    "articles.apps.ArticlesConfig",
     "level_tests.apps.LevelTestsConfig",
 ]
 

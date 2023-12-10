@@ -2,8 +2,8 @@
 
 from rest_framework import serializers
 
-from api.v1.core.utilities import get_skills
-from api.v1.goals.utilities import get_goal_level, update_goal_level
+from api.v1.core.utilities import get_average_level, get_skills
+from api.v1.goals.utilities import update_goal_level
 from goals.models import Goal
 from skills.models import Skill
 
@@ -30,7 +30,7 @@ class ReadGoalSerializer(serializers.ModelSerializer):
 
     def get_level(self, obj):
         """Get the goal level."""
-        return get_goal_level(self.context["request"].user, obj)
+        return get_average_level(self.context["request"].user, obj)
 
 
 class CreateUpdateGoalSerializer(serializers.ModelSerializer):
