@@ -1,4 +1,4 @@
-"""Serializers for the endpoints 'auth' of 'Api' application v1."""
+"""Serializers for the endpoints 'auth' of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
@@ -18,12 +18,16 @@ class AuthUserSignInSerilizer(serializers.Serializer):
         "invalid_password": "Invalid password.",
     }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = None
+
     def validate(self, data):
         email = data.get("email")
         password = data.get("password")
-        user = get_object_or_404(User, email=email)
+        self.user = get_object_or_404(User, email=email)
 
-        if not check_password(password, user.password):
+        if not check_password(password, self.user.password):
             raise serializers.ValidationError(
                 {"detail": self.error_messages["invalid_password"]}
             )

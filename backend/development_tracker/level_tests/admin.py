@@ -2,12 +2,7 @@
 
 from django.contrib import admin
 
-from level_tests.models import (
-    Answer,
-    LevelTest,
-    LevelTestProgress,
-    Question,
-)
+from level_tests.models import Answer, LevelTest, LevelTestProgress, Question
 
 
 class AnswerInline(admin.TabularInline):

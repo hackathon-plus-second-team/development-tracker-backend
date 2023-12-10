@@ -1,4 +1,4 @@
-"""Views for 'skills' endpoints of 'Api' application v1."""
+"""Views for 'skills' endpoints of the 'Api' application v1."""
 
 from django.shortcuts import get_object_or_404
 from rest_framework import status

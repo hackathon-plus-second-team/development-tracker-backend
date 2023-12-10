@@ -9,4 +9,9 @@ from goals.models import Goal
 class GoalAdmin(admin.ModelAdmin):
     """Settings for presenting 'Goal' model on the admin site."""
 
-    list_display = ("name", "user", "level", "deadline")
+    list_display = (
+        "name",
+        "user",
+        "level",
+        "deadline",
+    )

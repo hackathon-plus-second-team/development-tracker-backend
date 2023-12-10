@@ -1,4 +1,4 @@
-"""Serializers for the endpoints 'cources' of 'Api' application v1."""
+"""Serializers for the endpoints 'cources' of the 'Api' application v1."""
 
 from rest_framework import serializers
 
@@ -25,7 +25,7 @@ class CourseSerializer(serializers.ModelSerializer):
     def get_skills(self, obj):
         """Get a list of the course's skills."""
         return get_skills(self.context["request"].user, obj)
-    
+
     def get_level(self, obj):
         """Get the skill confirmation level for the course."""
         return get_average_level(self.context["request"].user, obj)

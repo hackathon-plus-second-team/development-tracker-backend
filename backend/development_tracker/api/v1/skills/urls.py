@@ -1,4 +1,4 @@
-"""URLs configuration of the endpoints 'skills' of 'Api' application v1."""
+"""URLs configuration of the endpoints 'skills' of the 'Api' application v1."""
 
 from django.urls import path
 

@@ -1,4 +1,4 @@
-"""Tests for the endpoints 'skills' of 'Api' application v1."""
+"""Tests for the endpoints 'skills' of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 from rest_framework import status

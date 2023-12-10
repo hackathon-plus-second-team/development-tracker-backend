@@ -1,4 +1,4 @@
-"""Configuration of 'Level_Tests' application."""
+"""Configuration of the 'Level_Tests' application."""
 
 from django.apps import AppConfig
 

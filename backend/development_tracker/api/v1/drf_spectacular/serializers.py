@@ -1,4 +1,4 @@
-"""Custom serializers describing responses for use in documentation."""
+"""Serializers describing responses for use in documentation."""
 
 from rest_framework import serializers
 

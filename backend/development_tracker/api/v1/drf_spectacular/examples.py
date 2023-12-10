@@ -13,7 +13,7 @@ MyCoursesList200ResponseExample = OpenApiExample(
         "name": "string",
         "description": "string",
         "skills": [{"id": 0, "name": "string", "level": 0}],
-        "level": 0
+        "level": 0,
     },
 )
 

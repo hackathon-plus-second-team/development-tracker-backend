@@ -1,4 +1,4 @@
-"""Serializers for the endpoints 'goals' of 'Api' application v1."""
+"""Serializers for the endpoints 'goals' of the 'Api' application v1."""
 
 from rest_framework import serializers
 
