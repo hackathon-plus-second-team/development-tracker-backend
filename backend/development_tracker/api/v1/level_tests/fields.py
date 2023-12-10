@@ -1,4 +1,4 @@
-"""Fields for the endpoints 'tests' of 'Api' application v1."""
+"""Fields for the endpoints 'tests' of the 'Api' application v1."""
 
 from rest_framework import serializers
 

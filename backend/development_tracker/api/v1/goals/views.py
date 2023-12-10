@@ -1,4 +1,4 @@
-"""Views for 'goals' endpoints of 'Api' application v1."""
+"""Views for 'goals' endpoints of the 'Api' application v1."""
 
 from api.v1.drf_spectacular.custom_decorators import (
     activate_drf_spectacular_view_decorator,

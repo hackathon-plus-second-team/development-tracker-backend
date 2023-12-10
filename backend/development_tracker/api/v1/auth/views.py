@@ -1,4 +1,4 @@
-"""Views for 'auth' endpoints of 'Api' application v1."""
+"""Views for 'auth' endpoints of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 from rest_framework import status
@@ -22,8 +22,7 @@ def signin(request):
     """Authenticate user and issue JWT-tokens."""
     serializer = AuthUserSignInSerilizer(data=request.data)
     serializer.is_valid(raise_exception=True)
-    user = User.objects.get(email=serializer.validated_data["email"])
-    refresh = RefreshToken.for_user(user)
+    refresh = RefreshToken.for_user(serializer.user)
     return Response(
         {"access": str(refresh.access_token), "refresh": str(refresh)},
         status=status.HTTP_200_OK,

@@ -1,4 +1,4 @@
-"""Views for 'courses' endpoints of 'Api' application v1."""
+"""Views for 'courses' endpoints of the 'Api' application v1."""
 
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -11,7 +11,7 @@ from api.v1.courses.serializers import CourseSerializer
 
 
 @activate_drf_spectacular_view_decorator
-@api_view(("GET",))
+@api_view()
 def my_courses(request):
     """List of courses paid for by the user."""
     paid_courses = request.user.paid_courses.all()

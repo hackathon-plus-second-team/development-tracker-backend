@@ -1,8 +1,8 @@
-"""Helper functions for the endpoints 'goals' of 'Api' application v1."""
+"""Helper functions for the endpoints 'goals' of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 
-from api.v1.core.utilities import get_average_level, get_skills
+from api.v1.core.utilities import get_average_level
 from goals.models import Goal
 
 User = get_user_model()

@@ -1,4 +1,4 @@
-"""Tests for the endpoints 'tests' of 'Api' application v1."""
+"""Tests for the endpoints 'tests' of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 from rest_framework import status
@@ -29,9 +29,7 @@ class LevelTestDetailTestCase(APITestCase):
         self.user = User.objects.create_user(
             email="test@example.com", password="testpassword"
         )
-        self.level_test = LevelTest.objects.create(
-            name="Django", skill=self.skill
-        )
+        self.level_test = LevelTest.objects.create(name="Django", skill=self.skill)
         self.question_first = Question.objects.create(
             name="question first",
             explanation="test question first",
@@ -109,7 +107,9 @@ class LevelTestDetailTestCase(APITestCase):
             ]
         }
         self.request = self.factory.post(
-            f"/api/v1/tests/{self.level_test.id}/answer/", data=request_data, format="json"
+            f"/api/v1/tests/{self.level_test.id}/answer/",
+            data=request_data,
+            format="json",
         )
         force_authenticate(self.request, user=self.user)
         response = level_test_answer(self.request, self.level_test.id)

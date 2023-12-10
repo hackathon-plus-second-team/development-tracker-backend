@@ -1,4 +1,4 @@
-"""Helper functions of 'Api' application v1."""
+"""Helper functions of the 'Api' application v1."""
 
 from django.contrib.auth import get_user_model
 

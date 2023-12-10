@@ -1,4 +1,4 @@
-"""Defining a manager for models of 'Users' application."""
+"""Defining a manager for models of the 'Users' application."""
 
 from django.contrib.auth.models import UserManager
 

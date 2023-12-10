@@ -1,4 +1,4 @@
-"""Viewsets for 'goals' endpoints of 'Api' application v1."""
+"""Viewsets for 'goals' endpoints of the 'Api' application v1."""
 
 from rest_framework import viewsets
 

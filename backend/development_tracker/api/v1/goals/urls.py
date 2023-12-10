@@ -1,4 +1,4 @@
-"""URLs configuration of the endpoints 'goals' of 'Api' application v1."""
+"""URLs configuration of the endpoints 'goals' of the 'Api' application v1."""
 
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter

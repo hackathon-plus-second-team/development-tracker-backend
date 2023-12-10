@@ -1,4 +1,4 @@
-"""Serializers for the endpoints 'tests' of 'Api' application v1."""
+"""Serializers for the endpoints 'tests' of the 'Api' application v1."""
 
 from django.db import transaction
 from rest_framework import serializers
