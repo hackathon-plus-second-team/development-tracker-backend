@@ -11,7 +11,7 @@
 - nginx 1.25.3
 - Docker 
 
-### Запуск backend
+### Запуск проекта
 
 - клонировать репозиторий
 
@@ -75,25 +75,6 @@ http://localhost/api/dynamic_doc/swagger/v1/
     "email": "admin@yandex.ru",
     "password": "admin"
 }
-```
-
-### Запуск [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend)
-
-- клонировать репозиторий
-
-```
-git@github.com:hackathon-plus-second-team/development-tracker-backend.git
-```
-
-- запустить сборку контейнеров:
-
-```
-docker-compose up -d
-```
-- проект доступен по адресу:
-
-```
-http://localhost:5173/
 ```
 
 ## Авторы
