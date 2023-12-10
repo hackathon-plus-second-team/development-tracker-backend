@@ -29,72 +29,68 @@ class LevelTestDetailTestCase(APITestCase):
         self.user = User.objects.create_user(
             email="test@example.com", password="testpassword"
         )
-
         self.level_test = LevelTest.objects.create(
-            id=1, name="Django", skill=self.skill
+            name="Django", skill=self.skill
         )
-        self.question_1 = Question.objects.create(
-            name="question 1",
-            explanation="test question 1",
+        self.question_first = Question.objects.create(
+            name="question first",
+            explanation="test question first",
             number=1,
             level_test=self.level_test,
         )
-        self.question_2 = Question.objects.create(
-            name="question 2",
-            explanation="test question 2",
+        self.question_second = Question.objects.create(
+            name="question second",
+            explanation="test question second",
             number=2,
             level_test=self.level_test,
         )
-        self.question_3 = Question.objects.create(
-            name="question 3",
-            explanation="test question 3",
+        self.question_third = Question.objects.create(
+            name="question third",
+            explanation="test question third",
             number=3,
             level_test=self.level_test,
         )
-
-        self.answer_1_question_1 = Answer.objects.create(
-            name="answer_1_question_1",
+        self.answer_first_question_first = Answer.objects.create(
+            name="answer_first_question_first",
             is_correct=True,
             number=1,
-            question=self.question_1,
+            question=self.question_first,
         )
-        self.answer_2_question_1 = Answer.objects.create(
-            name="answer_2_question_1",
+        self.answer_second_question_first = Answer.objects.create(
+            name="answer_second_question_first",
             is_correct=False,
             number=2,
-            question=self.question_1,
+            question=self.question_first,
         )
-
-        self.answer_1_question_2 = Answer.objects.create(
-            name="answer_1_question_2",
+        self.answer_first_question_second = Answer.objects.create(
+            name="answer_first_question_second",
             is_correct=True,
             number=1,
-            question=self.question_2,
+            question=self.question_second,
         )
-        self.answer_2_question_2 = Answer.objects.create(
-            name="answer_2_question_2",
+        self.answer_second_question_second = Answer.objects.create(
+            name="answer_second_question_second",
             is_correct=False,
             number=2,
-            question=self.question_2,
+            question=self.question_second,
         )
-
-        self.answer_1_question_3 = Answer.objects.create(
-            name="answer_1_question_3",
+        self.answer_first_question_third = Answer.objects.create(
+            name="answer_first_question_third",
             is_correct=True,
             number=1,
-            question=self.question_3,
+            question=self.question_third,
         )
-        self.answer_2_question_3 = Answer.objects.create(
-            name="answer_2_question_3",
+        self.answer_second_question_3 = Answer.objects.create(
+            name="answer_second_question_3",
             is_correct=False,
             number=2,
-            question=self.question_3,
+            question=self.question_third,
         )
 
     def test_level_test_detail(self):
-        request = self.factory.get("/api/v1/tests/1/")
+        request = self.factory.get(f"/api/v1/tests/{self.level_test.id}/")
         force_authenticate(request, user=self.user)
-        response = level_test_detail(request, 1)
+        response = level_test_detail(request, self.level_test.id)
         data = response.data
 
         expected_data = LevelTestSerializer(
@@ -113,10 +109,10 @@ class LevelTestDetailTestCase(APITestCase):
             ]
         }
         self.request = self.factory.post(
-            "/api/v1/tests/1/answer/", data=request_data, format="json"
+            f"/api/v1/tests/{self.level_test.id}/answer/", data=request_data, format="json"
         )
         force_authenticate(self.request, user=self.user)
-        response = level_test_answer(self.request, 1)
+        response = level_test_answer(self.request, self.level_test.id)
         data = response.data
 
         level_test_progress, _ = LevelTestProgress.objects.update_or_create(
@@ -136,7 +132,7 @@ class LevelTestDetailTestCase(APITestCase):
 
         serializer = LevelTestUserAnswersSerializer(
             instance=level_test_progress,
-            context={"request": self.request, "level_test": 1},
+            context={"request": self.request, "level_test": self.level_test.id},
         )
         expected_data = serializer.data
 
@@ -144,7 +140,7 @@ class LevelTestDetailTestCase(APITestCase):
         self.assertEqual(data, expected_data)
 
     def test_level_test_result(self):
-        request = self.factory.get("/api/v1/tests/1/result/")
+        request = self.factory.get(f"/api/v1/tests/{self.level_test.id}/result/")
         force_authenticate(request, user=self.user)
         test_result = LevelTestProgress.objects.create(
             level_test=self.level_test,
@@ -153,7 +149,7 @@ class LevelTestDetailTestCase(APITestCase):
             percentage_correct=8,
         )
         SkillProgress.objects.create(user=self.user, skill=self.skill)
-        response = level_test_result(request, 1)
+        response = level_test_result(request, self.level_test.id)
         data = response.data
 
         expected_data = LevelTestResultWithRecommendationsSerializer(
