@@ -11,7 +11,7 @@
 - nginx 1.25.3
 - Docker 
 
-### Как запустить проект
+### Запуск backend
 
 - клонировать репозиторий
 
@@ -77,7 +77,7 @@ http://localhost/api/dynamic_doc/swagger/v1/
 }
 ```
 
-### Запустить [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend)
+### Запуск [frontend](https://github.com/hackathon-plus-second-team/development-tracker-frontend)
 
 - клонировать репозиторий
 
